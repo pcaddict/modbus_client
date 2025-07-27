@@ -15,7 +15,7 @@ static int client_iface;
 
 const static struct modbus_iface_param client_param = {
 	.mode = MODBUS_MODE_RTU,
-	.rx_timeout = 50000,
+	.rx_timeout = 500000,
 	.serial = {
 		.baud = 9600,
 		.parity = UART_CFG_PARITY_NONE,
@@ -47,8 +47,8 @@ int main(void)
 		return 0;
 	}
 
-	err = modbus_read_input_regs(client_iface, node, 0x01, result,
-				       1);
+	// err = modbus_read_holding_regs(client_iface, node, 0x0101, result, 1);
+	err = modbus_read_input_regs(client_iface, node, 0x01, result, 2);
 	if (err != 0) {
 		LOG_ERR("FC04 failed with %d", err);
 		return 0;
